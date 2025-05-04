@@ -41,7 +41,7 @@ ELFTC_VCSID("$Id: libelf_fsize.m4 4074 2025-01-07 15:34:21Z jkoshy $");
  */
 
 divert(-1)
-include(SRCDIR`/elf_types.m4')
+include(`elf_types.m4')
 
 /*
  * Translations from structure definitions to the size of their file

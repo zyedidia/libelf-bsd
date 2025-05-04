@@ -11,7 +11,7 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS `AS IS' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
@@ -36,59 +36,65 @@ ELFTC_VCSID("$Id: libelf_msize.m4 4074 2025-01-07 15:34:21Z jkoshy $");
 
 /*@ELFTC-USE-DOWNSTREAM-VCSID@*/
 
-/* WARNING: GENERATED FROM __file__. */
+/* WARNING: GENERATED FROM libelf_msize.m4. */
 
 struct msize {
 	size_t	msz32;
 	size_t	msz64;
 };
 
-divert(-1)
-include(`elf_types.m4')
 
-/*
- * ELF types whose memory representations have a variable size.
- */
-define(BYTE_SIZE,	1)
-define(GNUHASH_SIZE,	1)
-define(NOTE_SIZE,	1)
-define(VDEF_SIZE,	1)
-define(VNEED_SIZE,	1)
-
-/*
- * Unimplemented types.
- */
-define(MOVEP_SIZE,	0)
-define(SXWORD_SIZE32,	0)
-define(XWORD_SIZE32,	0)
-
-define(`DEFINE_ELF_MSIZE',
-  `ifdef($1`_SIZE',
-    `define($1_SIZE32,$1_SIZE)
-     define($1_SIZE64,$1_SIZE)',
-    `ifdef($1`_SIZE32',`',
-      `define($1_SIZE32,sizeof(Elf32_$2))')
-     ifdef($1`_SIZE64',`',
-      `define($1_SIZE64,sizeof(Elf64_$2))')')')
-define(`DEFINE_ELF_MSIZES',
-  `ifelse($#,1,`',
-    `DEFINE_ELF_MSIZE($1)
-     DEFINE_ELF_MSIZES(shift($@))')')
-
-DEFINE_ELF_MSIZES(ELF_TYPE_LIST)
-
-define(`MSIZE',
-  `[ELF_T_$1] = { .msz32 = $1_SIZE32, .msz64 = $1_SIZE64 },
-')
-define(`MSIZES',
-  `ifelse($#,1,`',
-    `MSIZE($1)
-MSIZES(shift($@))')')
-
-divert(0)
 
 static struct msize msize[ELF_T_NUM] = {
-MSIZES(ELF_TYPE_LIST)
+[ELF_T_ADDR] = { .msz32 = sizeof(Elf32_Addr), .msz64 = sizeof(Elf64_Addr) },
+
+[ELF_T_BYTE] = { .msz32 = 1, .msz64 = 1 },
+
+[ELF_T_CAP] = { .msz32 = sizeof(Elf32_Cap), .msz64 = sizeof(Elf64_Cap) },
+
+[ELF_T_DYN] = { .msz32 = sizeof(Elf32_Dyn), .msz64 = sizeof(Elf64_Dyn) },
+
+[ELF_T_EHDR] = { .msz32 = sizeof(Elf32_Ehdr), .msz64 = sizeof(Elf64_Ehdr) },
+
+[ELF_T_GNUHASH] = { .msz32 = 1, .msz64 = 1 },
+
+[ELF_T_HALF] = { .msz32 = sizeof(Elf32_Half), .msz64 = sizeof(Elf64_Half) },
+
+[ELF_T_LWORD] = { .msz32 = sizeof(Elf32_Lword), .msz64 = sizeof(Elf64_Lword) },
+
+[ELF_T_MOVE] = { .msz32 = sizeof(Elf32_Move), .msz64 = sizeof(Elf64_Move) },
+
+[ELF_T_MOVEP] = { .msz32 = 0, .msz64 = 0 },
+
+[ELF_T_NOTE] = { .msz32 = 1, .msz64 = 1 },
+
+[ELF_T_OFF] = { .msz32 = sizeof(Elf32_Off), .msz64 = sizeof(Elf64_Off) },
+
+[ELF_T_PHDR] = { .msz32 = sizeof(Elf32_Phdr), .msz64 = sizeof(Elf64_Phdr) },
+
+[ELF_T_REL] = { .msz32 = sizeof(Elf32_Rel), .msz64 = sizeof(Elf64_Rel) },
+
+[ELF_T_RELA] = { .msz32 = sizeof(Elf32_Rela), .msz64 = sizeof(Elf64_Rela) },
+
+[ELF_T_SHDR] = { .msz32 = sizeof(Elf32_Shdr), .msz64 = sizeof(Elf64_Shdr) },
+
+[ELF_T_SWORD] = { .msz32 = sizeof(Elf32_Sword), .msz64 = sizeof(Elf64_Sword) },
+
+[ELF_T_SXWORD] = { .msz32 = 0, .msz64 = sizeof(Elf64_Sxword) },
+
+[ELF_T_SYMINFO] = { .msz32 = sizeof(Elf32_Syminfo), .msz64 = sizeof(Elf64_Syminfo) },
+
+[ELF_T_SYM] = { .msz32 = sizeof(Elf32_Sym), .msz64 = sizeof(Elf64_Sym) },
+
+[ELF_T_VDEF] = { .msz32 = 1, .msz64 = 1 },
+
+[ELF_T_VNEED] = { .msz32 = 1, .msz64 = 1 },
+
+[ELF_T_WORD] = { .msz32 = sizeof(Elf32_Word), .msz64 = sizeof(Elf64_Word) },
+
+[ELF_T_XWORD] = { .msz32 = 0, .msz64 = sizeof(Elf64_Xword) },
+
+
 };
 
 /*
