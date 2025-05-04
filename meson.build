@@ -63,8 +63,9 @@ srcs = files(
   'libelf_msize.c',
 )
 
-library(
+libelf = static_library(
   'elf',
   srcs,
   include_directories: include_directories('common'),
 )
+libelf_dep = declare_dependency(link_with: libelf, include_directories: include_directories('.'))
