@@ -68,4 +68,4 @@ libelf = static_library(
   srcs,
   include_directories: include_directories('common'),
 )
-libelf_dep = declare_dependency(link_with: libelf, include_directories: include_directories('.'))
+libelf_dep = declare_dependency(link_with: libelf, include_directories: include_directories('.', 'common'))
